@@ -1,0 +1,306 @@
+<style>
+  
+
+audio {
+  background: orange;
+  height: 50px;
+  width: 100%;
+}
+
+header img {
+  margin-top: 20px;
+  height: 100px;
+  width: 100px;
+}
+
+#container {
+  background: #fff;
+  width: 70%;
+  margin: 25px auto;
+  border: 1px solid;
+  border-radius: 0.5%;
+}
+
+header {
+  background:  #5f4eb5;
+  text-align: center;
+  padding: 1%;
+  color: white;
+}
+
+form {
+  margin: 5%;
+  width: 70%;
+}
+
+fieldset {
+  border: 0px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+#country,
+input[type="email"],
+input[type="password"],
+textarea {
+  border: 1px solid #513cba;
+  display: block;
+  margin: 10px auto;
+  padding: 2%;
+  width: 100%;
+}
+
+input[type="radio"] {
+  margin-top: 1.5%;
+}
+
+#submitButton {
+  background: #c1beba;
+  padding: 15px 10px;
+  float: left;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+#submitButton:hover {
+  filter: brightness(115%);
+}
+
+#resetButton {
+  background: #e24f2b;
+  padding: 15px 10px;
+  color: white;
+  float: right;
+  cursor: pointer;
+}
+
+#resetButton:hover {
+  filter: brightness(115%);
+}
+
+#part-1 label:after {
+  content: " *";
+  color: red;
+}
+
+#part-2 label:after {
+  content: " *";
+  color: red;
+}
+
+textarea {
+  resize: none;
+}
+
+/*Media Query */
+
+@media all and (min-width: 0px) and (max-width: 320px) {
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  #container {
+    width: 90%;
+    margin-top: 20%;
+  }
+  #tema {
+    width: 100%;
+    left: 0.5px;
+    top: 0;
+  }
+  #resetButton {
+    float: left;
+  }
+}
+
+@media all and (min-width: 321px) and (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  #container {
+    width: 90%;
+    margin-top: 13%;
+  }
+  #tema {
+    width: 100%;
+    left: 0.5px;
+    top: 0;
+  }
+  #resetButton {
+    float: left;
+  }
+}
+
+@media all and (min-width: 481px) and (max-width: 568px) {
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  #container {
+    width: 90%;
+    margin-top: 10%;
+  }
+  #tema {
+    width: 100%;
+    left: 0.5px;
+    top: 0;
+  }
+}
+
+@media all and (min-width: 569px) and (max-width: 768px) {
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  #container {
+    width: 90%;
+    margin-top: 7%;
+  }
+  #tema {
+    width: 100%;
+    left: 0.5px;
+    top: 0;
+  }
+}
+
+</style>
+   <!-- START FORM BODY -->
+   <div id="container" class="editable" class="widget-wrap">
+   <!-- <header>
+      <img src="https://auctionking.com/assets/charity/logo/YourLogoHere.png">
+      <h1>CONTACT FORM</h1>
+    </header>-->
+    
+    <form>
+      <fieldset>
+        <!--<legend>Fields marked with * are required</legend>-->
+        <br/>
+
+        <!-- START DIV part-1 PERSONAL INFORMATION -->
+        <div id="part-1">
+          <h2>Personal Information</h2>
+          <label for="first-name">First Name</label>
+          <input type="text" name="first-name" id="first_name"   required>
+          <br/>
+          <label for="last-name">Last Name</label>
+          <input type="text" name="last-name" id="last_name" required> 
+          <br/>
+          <label for="phone_number">phone number</label>
+          <input type="number" name="phone_number"  id="phone_number" required>
+          <br/>
+         
+        <!-- END DIV part-1 PERSONAL INFORMATION -->
+        <br/>
+
+         <!-- START DIV part-2 ACCOUNT INFORMATION -->
+        <div id="part-2"
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+        <!-- END DIV part-2 ACCOUNT INFORMATION -->
+        
+        
+        <br/><br/>
+        <input type="submit" id="update" name="update" value="update" onclick="updatec()">
+       <!-- <input type="reset" id="resetButton" value="Reset all info" tabindex="-1">-->
+      </fieldset>
+    </form>
+  </div>
+  <!-- END FORM BODY -->
+
+
+  
+  <script>
+
+   
+    $(document).ready(function(){
+      //alert("clientPassword " +clientPassword)
+     document.getElementById("first_name").value =clientFirstName;
+     document.getElementById("last_name").defaultValue = clientLasttName;
+     document.getElementById("password").defaultValue = clientPassword;
+     document.getElementById("phone_number").defaultValue = clientPhone;    
+      
+    })
+    function updatec(){
+     
+      clientFirstName = document.getElementById("first_name").value;
+      clientLasttName = document.getElementById("last_name").value;
+      clientPassword =document.getElementById("password").value;
+      phone_number =  document.getElementById("phone_number").value;
+
+      /*let upClient={first_name: clientFirstName,
+                    last_name:clientLasttName,
+                    numOfCoins: clientCoins,
+                    date_of_birth: clientBirthDate,
+                    ID : clientID,
+                    password :clientPassword,
+                    phone_number :clientPhone }*/
+                    
+     // alert("im in update!!")
+      
+      //update client info
+      fetch("/client/updateclient", {
+           method: "post",
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({first_name: clientFirstName,
+                    last_name:clientLasttName,
+                    numOfCoins: clientCoins,
+                    date_of_birth: clientBirthDate,
+                    ID : clientID,
+                    password :clientPassword,
+                    phone_number :clientPhone })
+         })
+         .then(response => response.json())
+         .then(data => {
+          if(data){}
+            // alert("update client done succefully")
+          else
+          alert("update client did no succed")
+         })
+    
+      
+    }
+    // if some input change we need to update
+    $("first_name").change(function(){
+      clientFirstName= $("first_name").text();
+  });
+  $("last_name").change(function(){
+    clientFirstName= $("first_name").text();
+  });
+  
+  $("birthdate").change(function(){
+    
+  });
+  $("age").change(function(){
+    
+  });
+  $("country").change(function(){
+    
+  });
+  $("gender").change(function(){
+    
+  });
+  $("email").change(function(){
+    
+  });
+  $("password").change(function(){
+    
+  });
+ 
+  </script>
+
+
+
+    

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        const nodemiler = require('nodemiler')
+        var CLIENT_ID = '206917665386-8jtbqt8v2qnpbsuqq06b62gr4icq11h1.apps.googleusercontent.com'
+        var CLEINT_SECRET = 'AIzaSyAHvjq7fKTjNtKovE53WsgL-BivEUrCFyQ';
+        async function sendEmail(){
+            try{
+                const transport = nodemiler.createTransport({
+                    service: 'gmail',
+                    auth: { 
+                        type: 'OAuth2',
+        user: 'yours authorised email address',
+        clientId: CLIENT_ID,
+        clientSecret: CLEINT_SECRET,
+        accessToken: 'ya29.a0AVA9y1u43EP4kiy2B5jy2ywA75RhTv2Leh__35Qta0rr43N2GnVFXFVDvmTnofD0Jel-qVW2EGw7SEls8dOofVYWqQaWFtG3-nflXRUhz7GB_6HK0RW_ehdFS5L7XAgUOusmFl1LhwA9Xna-uyyVEKHMZcJ2',
+      },
+    });
+ 
+    const mailOptions = {
+      from: 'leahaimovich17@gmail.com>',
+      to: 'leahaimovich17@gmail.com',
+      subject: 'Hello from gmail using API',
+      text: 'Hello from gmail email using API',
+      html: '<h1>Hello from gmail email using API</h1>',
+    };
+ 
+    const result = await transport.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+ 
+sendMail()
+  .then((result) => console.log('Email sent...', result))
+  .catch((error) => console.log(error.message));
+              
+    </script>
+</body>
+</html>

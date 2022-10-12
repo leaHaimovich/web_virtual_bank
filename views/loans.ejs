@@ -1,0 +1,138 @@
+<style>
+    /*button desing*/
+hi {
+	 margin: 0;
+	 padding: 0;
+	 width: 100%;
+	 height: 100%;
+	 background: #2c3e50;
+	 font-size: 16px;
+}
+ hii {
+	 display: flex;
+	 flex-wrap: wrap;
+	 justify-content: space-around;
+	 align-items: center;
+	 align-content: center;
+}
+
+ 
+ 
+ .btn {
+	 box-sizing: border-box;
+	 appearance: none;
+	 background-color: transparent;
+	 border: 2px solid #e74c3c;
+	 border-radius: 0.6em;
+	 color: #e74c3c;
+	 cursor: pointer;
+	 display: flex;
+	 align-self: center;
+	 font-size: 1rem;
+	 font-weight: 400;
+	 line-height: 1;
+	 margin: 20px;
+	 padding: 1.2em 2.8em;
+	 text-decoration: none;
+	 text-align: center;
+	 text-transform: uppercase;
+}
+ .btn:hover, .btn:focus {
+	 color: #fff;
+	 outline: 0;
+}
+ 
+ .third {
+    position: fixed;
+   left: 50%;
+   top:20%;
+	 border-color: #3498db;
+	 color: #fff;
+	 box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+	 transition: all 150ms ease-in-out;
+}
+ .third:hover {
+	 box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+/* form desing*/
+.lh{
+    display:flex;
+    text-align:center;
+    left      : 50%;
+    top       : 50%;
+    position  : absolute;
+    transform : translate(-50%, -50%);
+
+}
+</style>
+<!--<link href="css/index.css" rel="stylesheet">-->
+<div class="editable" class="widget-wrap">
+    <div class="hi hii">
+        <button id="newLoanbtn" class="btn third">new loan</button>
+    </div>
+   
+    <form align="center" class="lh" id="newloan"  onsubmit="return newLoan();"> <!--action="/action_page.php"-->
+        <p><input class="w3-input w3-border" type="text" placeholder="lender id" required name="lender_id" id="lender_id"></p>
+        <p><input class="w3-input w3-border" type="text" placeholder="borrower_id" required name="borrower_id" id="borrower_id"></p>
+        <p><input class="w3-input w3-border" type="text" placeholder="num Of Coins" required name="numOfCoins" id ="numOfCoins"></p>
+        <p>return date:</p>
+        <p><input class="w3-input w3-border" type="date" placeholder="return date" required name="returndate" id ="returndate"></p>
+        
+          <button class="w3-button w3-black" type="submit" id="Loan_approval" >
+            <i class="fa fa-paper-plane"></i> Loan approval
+          </button>
+        </p>
+        <h1 id="loan_done" >loan done succefully...</h1> 
+      </form>
+</div>
+<script>
+    $(document).ready(function () {
+  
+  document.getElementById("newloan").style.display="none";
+  document.getElementById("loan_done").hidden= true;
+});
+   
+    function newLoan(){
+//document.getElementById("first_name").value;
+     let lender_id = document.getElementById("lender_id").value;
+     let borrower_id = document.getElementById("borrower_id").value;
+     let numOfCoins1 = document.getElementById("numOfCoins").value;
+     let returndate = document.getElementById("returndate").value;
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
+    // בקשה לשרת ליצירת הלוואה חדשה - עובד
+      fetch("/loan/newloan", {
+           method: "post",
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+            lender_ID:lender_id,
+            borrower_ID:borrower_id,
+            numOfCoins: numOfCoins1,
+            date_of_loan: date,
+            date_of_return: returndate
+           })
+         })
+         .then(response => response.json())
+         .then(data => {
+          if(data)
+             {alert("loan done succefully");
+             document.getElementById("loan_done").hidden= false;
+             let a = Number(localStorage.getItem('LEVCOINS')) - Number(numOfCoins1);
+            localStorage.setItem("LEVCOINS",a);
+            }
+          else if(data == false)
+                alert("loan did no succed")
+         })
+
+         
+    };
+
+    $("#newLoanbtn").click(function(){
+        document.getElementById("newloan").style.display="block";
+        document.getElementById("newLoanbtn").disabled = true;
+    });
+  </script>

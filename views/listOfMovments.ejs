@@ -1,0 +1,657 @@
+<style>
+    /*table list*/
+    h1 {
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+    table {
+  width: 100%;
+  table-layout: fixed;
+}
+.tbl-header {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.tbl-content {
+  height: 300px;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+/* demo styles */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+.myd {
+  background: -webkit-linear-gradient(left, #032d1b, #25b7c4);
+  background: linear-gradient(to right, #082f1f, #25b7c4);
+  font-family: "Roboto", sans-serif;
+  margin: 50px;
+}
+
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/*button*/
+.container {
+	 overflow-x: hidden;
+	 position: relative;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 height: 20vh;
+}
+ .button {
+	 max-width: 200px;
+	 width: 100%;	
+	 font-size: 16px;
+	 font-weight: 300;
+	 color: #fff;
+	 cursor: pointer;
+	 margin: 20px;
+	 height: 55px;
+	 text-align: center;
+	 border: none;
+	 background-size: 300% 100%;
+	 border-radius: 3rem;
+	 transition: all 0.4s ease-in-out;
+}
+ .button:hover {
+	 background-position: 100% 0;
+	 color: black;
+	 transform: translatey(-0.3rem);
+}
+ .color--blue {
+	 background-image: linear-gradient(to right, #25aae1, #141416, #9cecfb,  #25b7c4);
+	 box-shadow: 0 4px 15px 0  #25b7c4;
+}
+
+
+</style>
+
+<section class="container" id="btn">
+  <button class="button color--blue" onclick="lastweekMovments()" >movements from this week</button>
+  <button class="button color--blue" onclick="lastmonthMovments()">movements from this month</button>
+  <button class="button color--blue" onclick="lastyaerMovments()">movements from this years</button>
+</section>
+<div id="h" class="myd"></div> 
+<!--<button onclick="lastweekMovments()" class="btn">movements from this week</button>
+  <button onclick="lastmonthMovments()" class="btn">movements from this month</button>
+  <button onclick="lastyaerMovments()" class="btn">movements from this years</button>-->
+<div id="h2" class="myd">
+</div>
+
+<script>
+  let data1 = null;
+  let data2 = null;
+  let t = null;
+  //get list of movements
+  function movements_list() {
+    //get loans list
+    fetch("/loan/allLoans", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lender_ID: clientID,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+         
+          var objLength = data.length;
+var myvar = '<h1>loans: </h1> <div class="tbl-header"><table cellpadding="0" cellspacing="0" border="0">'
+    +'<thead>'+
+'<tr>'+
+'<th>lender_ID</th>'+
+'<th>borrower_ID</th>'+
+'<th>numOfCoins</th>'+
+'<th>date_of_loan</th>'+
+'</tr>'+
+'</thead>'+
+   ' </table>' + '</div>';
+
+   myvar += '<div class="tbl-content">'+
+  '  <table cellpadding="0" cellspacing="0" border="0">'+
+      '<tbody>';
+
+ for(var i = 0; i < objLength; i++){
+myvar += '<tr>'+
+'<td>'+data[i].lender_ID+'</td>'+
+'<td>'+data[i].borrower_ID+'</tD>'+
+'<td>'+data[i].numOfCoins+'</th>'+
+  '<td>'+data[i].date_of_loan+'</th>'+
+'</tr>'     
+ }
+
+ myvar +=' </tbody>'+
+    '</table>'+
+  '</div>' ;
+
+
+          document.getElementById("h").innerHTML += myvar;
+
+          //("now transfers")
+          // get all transfers
+          fetch("/transfers/alltransfers", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              //lender_ID: clientID,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data1) => {
+              if (data1) {
+                //alert("transfers found");
+                t = JSON.stringify(data) + JSON.stringify(data1);
+                //alert("data before sending " + typeof t + t);
+                //return JSON.stringify(t);
+
+                var objLength_ = data1.length;
+                var myvar2 = '<h1>transfers: </h1> <div class="tbl-header"><table cellpadding="0" cellspacing="0" border="0">'
+    +'<thead>'+
+                "<tr>" +
+                  "<th> from_ID </th>" +
+                  "<th>to_ID</th>" +
+                  "<th>numOfCoins</th>" +
+                  "<th>date_of_trasfers</th>" +
+                  "</tr>"+
+                  '</thead>'+
+   ' </table>' + '</div>';
+
+   myvar2 += '<div class="tbl-content">'+
+  '  <table cellpadding="0" cellspacing="0" border="0">'+
+      '<tbody>';
+
+                for (var i = 0; i < objLength_; i++) {
+                  myvar2 +=
+                    "<tr>" +
+                    "<td>" +
+                    data1[i].from_ID +
+                    "</td>" +
+                    "<td>" +
+                    data1[i].to_ID +
+                    "</tD>" +
+                    "<td>" +
+                    data1[i].numOfCoins +
+                    "</th>" +
+                    "<td>" +
+                    data1[i].date_of_transfers +
+                    "</th>" +
+                    "</tr>";
+                }
+                myvar2 += "</tbody>";
+                myvar2 += '</table>' + '</div>' ;
+                document.getElementById("h").innerHTML += myvar2;
+              } else alert("movement Not Found");
+            });
+
+          //myvar += '</table>';
+          //document.getElementById("h").innerHTML += myvar;
+        } else alert("loans Not Found");
+      });
+    //return JSON.stringify(t);
+  }
+
+  $(document).ready(function () {
+    movements_list();
+  });
+
+  function lastmonthMovments() {
+    document.getElementById("h").innerHTML = "";
+    //document.getElementById("h2").innerHTML = "";
+    document.getElementById('btn').style.display="none";
+    //get loans list
+    fetch("/loan/allLoans", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lender_ID: clientID,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          var objLength = data.length;
+          //checking how is in the last month
+          var today = new Date();
+          var date =
+            today.getFullYear() +
+            "-" +
+            (today.getMonth() + 1) +
+            "-" +
+            today.getDate();
+          var days = null;
+          var date1 = null;
+          //alert("data " + JSON.stringify(data))
+          //alert("objLength " +objLength)
+          for (var i = 0; i < objLength; i++) {
+            if (data[i] == undefined) {
+              break;
+            }
+            date1 = new Date(data[i].date_of_loan);
+            //alert("hi 1  data[i].date_of_loan.getDate() " + date1.getDate()+ " type: " + typeof((date1.getDate())));
+            days = Number(today.getDate()) - Number(date1.getDate());
+            //alert("im cheking, days: " + days + " i " +i + " date1.getDate() " + date1.getDate());
+            if (date1.getMonth() != today.getMonth() + 1) {
+              data.splice(i, 1);
+            }
+          }
+         // alert("hi  "); //+ JSON.stringify(data))
+          data = JSON.stringify(data);
+          var myvar =  
+            '<section class="container">'+
+  '<button class="button color--blue" onclick="lastweekMovments()" >movements from this week</button>'+
+ '<button class="button color--blue" onclick="lastyaerMovments()">movements from this years</button>'+
+'</section>'+"<br><br><h1>loans:</h1><table>" + "<br><br>";
+          "<tr>" +
+            "<th>lender_ID</th>" +
+            "<th>borrower_ID</th>" +
+            "<th>numOfCoins</th>" +
+            "<th>date_of_loan</th>" +
+            "</tr>";
+
+          for (var i = 0; i < objLength; i++) {
+            myvar +=
+              "<tr>" +
+              "<td>" +
+              data[i].lender_ID +
+              "</td>" +
+              "<td>" +
+              data[i].borrower_ID +
+              "</tD>" +
+              "<td>" +
+              data[i].numOfCoins +
+              "</th>" +
+              "<td>" +
+              data[i].date_of_loan +
+              "</th>" +
+              "</tr>";
+          }
+
+          myvar +=
+            "</table>";
+            
+
+          document.getElementById("h").innerHTML = myvar;
+
+          // get all transfers
+          fetch("/transfers/alltransfers", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              //lender_ID: clientID,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data1) => {
+              if (data1) {
+                var objLength_ = data1.length;
+                //checking how is in the last month
+                var today = new Date();
+                var date =
+                  today.getFullYear() +
+                  "-" +
+                  (today.getMonth() + 1) +
+                  "-" +
+                  today.getDate();
+                let date11;
+                for (var i = 0; i < objLength_; i++) {
+                  if (data1[i] == undefined) {
+                    break;
+                  }
+                  date11 = new Date(data1[i].date_of_transfers);
+                  var days = today.getDate() - date11.getDate();
+                  if (date11.getMonth() != today.getMonth() + 1) {
+                    data1.splice(i, 1);
+                  }
+                }
+
+                var myvar2 = "<h1>transfers:</h1><table>" + "<br><br>";
+                "<tr>" +
+                  "<th>from_ID</th>" +
+                  "<th>to_ID</th>" +
+                  "<th>numOfCoins</th>" +
+                  "<th>date_of_trasfers</th>" +
+                  "</tr>";
+
+                for (var i = 0; i < objLength_; i++) {
+                  if (data1[i] == undefined) {
+                    break;
+                  }
+                  myvar2 +=
+                    //"<tr>" +
+                    "<td>" +
+                    data1[i].from_ID +
+                    "</td>" +
+                    "<td>" +
+                    data1[i].to_ID +
+                    "</tD>" +
+                    "<td>" +
+                    data1[i].numOfCoins +
+                    "</th>" +
+                    "<td>" +
+                    data1[i].date_of_transfers +
+                    "</th>" +
+                    "</tr>";
+                }
+                myvar2 += "</tbody>";
+                myvar2 += "</table>";
+                document.getElementById("h2").innerHTML = myvar2;
+              } else alert("movement Not Found");
+            });
+
+          //myvar += '</table>';
+          //document.getElementById("h").innerHTML += myvar;
+        } else alert("loans Not Found");
+      });
+  }
+
+  //last week monement
+  function lastweekMovments() {
+    document.getElementById('btn').style.display="none";
+    document.getElementById("h").innerHTML = "";
+   // document.getElementById("h2").innerHTML = "";
+    //get loans list
+    fetch("/loan/allLoans", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lender_ID: clientID,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          var objLength = data.length;
+          //checking how is in the last month
+          var today = new Date();
+          var date =
+            today.getFullYear() +
+            "-" +
+            (today.getMonth() + 1) +
+            "-" +
+            today.getDate();
+          var days = null;
+          var date1 = null;
+          for (var i = 0; i < objLength; i++) {
+            if (data[i] == undefined) {
+              break;
+            }
+            date1 = new Date(data[i].date_of_loan);
+            days = Number(today.getDate()) - Number(date1.getDate());
+            if (days > 7) {
+              data.splice(i, 1);
+            }
+          }
+          data = JSON.stringify(data);
+          var myvar = '<section class="container">' +
+  '<button class="button color--blue" onclick="lastmonthMovments()">movements from this month</button>'+
+  '<button class="button color--blue" onclick="lastyaerMovments()">movements from this years</button>'+
+'</section>'
+          +"<br><br><h1>loans:</h1><table>" + "<br><br>";
+          "<tr>" +
+            "<th>lender_ID</th>" +
+            "<th>borrower_ID</th>" +
+            "<th>numOfCoins</th>" +
+            "<th>date_of_loan</th>" +
+            "</tr>";
+
+          for (var i = 0; i < objLength; i++) {
+            myvar +=
+              "<tr>" +
+              "<td>" +
+              data[i].lender_ID +
+              "</td>" +
+              "<td>" +
+              data[i].borrower_ID +
+              "</tD>" +
+              "<td>" +
+              data[i].numOfCoins +
+              "</th>" +
+              "<td>" +
+              data[i].date_of_loan +
+              "</th>" +
+              "</tr>";
+          }
+
+          myvar +=
+            "</table>";
+
+          document.getElementById("h").innerHTML = myvar;
+
+          // get all transfers
+          fetch("/transfers/alltransfers", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+            }),
+          })
+            .then((response) => response.json())
+            .then((data1) => {
+              if (data1) {
+                var objLength_ = data1.length;
+                //checking how is in the last month
+                var today = new Date();
+                var date =
+                  today.getFullYear() +
+                  "-" +
+                  (today.getMonth() + 1) +
+                  "-" +
+                  today.getDate();
+                let date11;
+                for (var i = 0; i < objLength_; i++) {
+                  date11 = new Date(data1[i].date_of_loan);
+                  var days = today.getDate() - date11.getDate();
+                  if (days > 7) {
+                    alert("sorry its been more then a week");
+                    data1.splice(i, 1);
+                  }
+                }
+
+                var myvar2 = "<h1>transfers:</h1><table>" + "<br><br>";
+                "<tr>" +
+                  "<th>from_ID</th>" +
+                  "<th>to_ID</th>" +
+                  "<th>numOfCoins</th>" +
+                  "<th>date_of_trasfers</th>" +
+                  "</tr>";
+
+                for (var i = 0; i < objLength_; i++) {
+                  myvar2 +=
+                    //"<tr>" +
+                    "<td>" +
+                    data1[i].from_ID +
+                    "</td>" +
+                    "<td>" +
+                    data1[i].to_ID +
+                    "</tD>" +
+                    "<td>" +
+                    data1[i].numOfCoins +
+                    "</th>" +
+                    "<td>" +
+                    data1[i].date_of_transfers +
+                    "</th>" +
+                    "</tr>";
+                }
+                myvar2 += "</tbody>";
+                myvar2 += "</table>";
+                document.getElementById("h2").innerHTML = myvar2;
+              } else alert("movement Not Found");
+            });
+
+        } else alert("loans Not Found");
+      });
+  }
+  function lastyaerMovments() {
+    document.getElementById('btn').style.display="none";
+    document.getElementById("h").innerHTML = "";
+    document.getElementById("h2").innerHTML = "";
+    //get loans list
+    fetch("/loan/allLoans", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lender_ID: clientID,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          var objLength = data.length;
+          //checking how is in the last month
+          var today = new Date();
+          var date =
+            today.getFullYear() +
+            "-" +
+            (today.getMonth() + 1) +
+            "-" +
+            today.getDate();
+          var days = null;
+          var date1 = null;
+          //alert("data " + JSON.stringify(data))
+          //alert("objLength " +objLength)
+          for (var i = 0; i < objLength; i++) {
+            if (data[i] == undefined) {
+              break;
+            }
+            date1 = new Date(data[i].date_of_loan);
+            //alert("hi 1  data[i].date_of_loan.getDate() " + date1.getDate()+ " type: " + typeof((date1.getDate())));
+            // days = Number(today.getDate()) - Number(date1.getDate());
+            //alert("im cheking, days: " + days + " i " +i + " date1.getDate() " + date1.getDate());
+            if (date1.getFullYear() != today.getFullYear()) {
+              data.splice(i, 1);
+            }
+          }
+          //alert("hi  "); //+ JSON.stringify(data))
+          data = JSON.stringify(data);
+          var myvar = '<section class="container">'+
+  '<button class="button color--blue" onclick="lastweekMovments()" >movements from this week</button>'+
+  '<button class="button color--blue" onclick="lastmonthMovments()">movements from this month</button> '+
+'</section>'
+           + "<br><br><h1>loans:</h1><table>" + "<br><br>";
+          "<tr>" +
+            "<th>lender_ID</th>" +
+            "<th>borrower_ID</th>" +
+            "<th>numOfCoins</th>" +
+            "<th>date_of_loan</th>" +
+            "</tr>";
+
+          for (var i = 0; i < objLength; i++) {
+            myvar +=
+              "<tr>" +
+              "<td>" +
+              data[i].lender_ID +
+              "</td>" +
+              "<td>" +
+              data[i].borrower_ID +
+              "</tD>" +
+              "<td>" +
+              data[i].numOfCoins +
+              "</th>" +
+              "<td>" +
+              data[i].date_of_loan +
+              "</th>" +
+              "</tr>";
+          }
+
+          myvar +=
+            "</table>" ;
+
+          document.getElementById("h").innerHTML = myvar;
+
+          // get all transfers
+          fetch("/transfers/alltransfers", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              //lender_ID: clientID,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data1) => {
+              if (data1) {
+                var objLength_ = data1.length;
+                //checking how is in the last month
+                var today = new Date();
+                var date =
+                  today.getFullYear() +
+                  "-" +
+                  (today.getMonth() + 1) +
+                  "-" +
+                  today.getDate();
+                let date11;
+                for (var i = 0; i < objLength_; i++) {
+                  if (data1[i] == undefined) {
+                    break;
+                  }
+                  date11 = new Date(data1[i].date_of_transfers);
+                  //var days = today.getFullYear() - date11.getFullYear();
+                  if (date11.getFullYear() != today.getFullYear()) {
+                    data1.splice(i, 1);
+                  }
+                }
+
+                var myvar2 = "<h1>transfers:</h1><table>" + "<br><br>";
+                "<tr>" +
+                  "<th>from_ID</th>" +
+                  "<th>to_ID</th>" +
+                  "<th>numOfCoins</th>" +
+                  "<th>date_of_trasfers</th>" +
+                  "</tr>";
+
+                for (var i = 0; i < objLength_; i++) {
+                  if (data1[i] == undefined) {
+                    break;
+                  }
+                  myvar2 +=
+                    //"<tr>" +
+                    "<td>" +
+                    data1[i].from_ID +
+                    "</td>" +
+                    "<td>" +
+                    data1[i].to_ID +
+                    "</tD>" +
+                    "<td>" +
+                    data1[i].numOfCoins +
+                    "</th>" +
+                    "<td>" +
+                    data1[i].date_of_transfers +
+                    "</th>" +
+                    "</tr>";
+                }
+                myvar2 += "</tbody>";
+                myvar2 += "</table>";
+                document.getElementById("h2").innerHTML = myvar2;
+              } else alert("movement Not Found");
+            });
+        } else alert("loans Not Found");
+      });
+  }
+</script>

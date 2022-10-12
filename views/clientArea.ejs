@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>clieat area</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+  <!--<link  rel="stylesheet" href="../public/css/index.css">-->
+  <!--<link  rel="stylesheet" href="../public/css/App.css">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.imgbckg{
+  padding-top: 50px;
+  padding-bottom: 400px;   
+  text-align: center;
+  color: #f8f8f8;
+  background: linear-gradient(rgba(60, 199, 187, 0.7), rgba(51, 163, 189, 0.8)),
+    url("https://static.pexels.com/photos/50987/money-card-business-credit-card-50987-large.jpeg");
+  background-size: cover;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  z-index: -1;
+}
+
+  
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+/* (A) EDITABLE TABLE */
+.editable {
+  border-collapse: collapse;
+  /*margin-bottom: 10px;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGf9fLwvm74jrpNPY0V55iZV7XtBG8ez9Z_g&usqp=CAU);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.editable th, .editable td {
+  border: 1px solid #000;
+  padding: 10px;
+}
+.editable th {
+  color: #fff;
+  background: #000;
+}
+.editable td.edit {
+  background: #ffe7e7;
+}
+
+/* (X) DOES NOT MATTER */
+/* PAGE & BODY */
+* {
+  font-family: arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+
+/* WIDGET */
+.widget-wrap {
+  width: 600px; 
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* FOOTER */
+#code-boxx {
+  font-weight: 600;
+  margin-top: 30px;
+}
+#code-boxx a {
+  display: inline-block;
+  border: 0;
+  padding: 5px;
+  text-decoration: none;
+  background: #b90a0a;
+  color: #fff;
+}
+/*chat button style*/
+.live-chat-btn {
+	 position: fixed;
+	 bottom: 10px;
+	 right: 10px;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+}
+ .live-chat-btn.live-chat-opened {
+	 background-color: transparent;
+}
+ .live-chat-btn.live-chat-opened .live-chat-text {
+	 display: none;
+}
+ .live-chat-btn:not(.live-chat-opened) ~ #get-notification {
+	 display: none;
+}
+ .live-chat-icon {
+	 color: white;
+	 border-radius: 50%;
+	 padding: 12px 12px;
+	 font-size: 26px;
+}
+ .live-chat-icon.live-chat-has-notifications::after {
+	 content: attr(data-notifications);
+	 position: absolute;
+	 top: 0;
+	 right: 0;
+	 font-size: 18px;
+	 font-weight: bold;
+	 min-width: 25px;
+	 width: auto;
+	 height: 25px;
+	 border-radius: 50%;
+	 padding: 5px;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 background: red;
+}
+ .live-chat-icon-online {
+	 background-color: #0091da;
+}
+ .live-chat-icon-offline {
+	 background-color: #e6e6e6;
+}
+ .bg {
+	 height: 2000px;
+}
+ /*button {
+	 position: fixed;
+}
+ button#get-notification {
+	 left: 130px;
+}*/
+ .btn-online {
+	 position: fixed;
+	 bottom: 16px;
+	 right: 16px;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+}
+ 
+
+
+ /*chat windows*/
+ /*.App {
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  color: #212121;
+  font-family: "Open Sans", sans-serif;
+  display: grid;
+  place-items: center;
+}
+body {
+  margin: 0%;
+  padding: 0%;
+}
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+
+
+}
+*/
+.form-popup {
+  display: none;
+  position: fixed;
+  right: 15px;
+  border: 3px solid #8dbedf;
+  z-index: 10;
+  border-radius: 12px;}
+/* Add styles to the form container */
+.form-container {
+
+  max-width: 300px;
+  padding: 10px;
+  background-color:rgb(239, 184, 209);
+  border-radius: 12px;
+  bottom: 0px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 7px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: ghostwhite;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color:azure;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+  border-radius: 12px;
+
+  
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+
+.chat-window {
+  
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    transform: translateY(70px);
+    transition: all 250ms ease-out;
+    border-radius: 50%;
+  /*width: 300px;
+  height: 420px;*/
+ 
+}
+
+.chat-window p {
+  margin: 0;
+}
+.chat-window .chat-header {
+  height: 45px;
+  border-radius: 6px;
+  background: #263238;
+  position: relative;
+  cursor: pointer;
+  bottom: 100px;
+}
+.chat-window .chat-header p {
+  display: block;
+  padding: 0 1em 0 2em;
+  color: #fff;
+  font-weight: 700;
+  line-height: 45px;
+}
+
+.chat-window .chat-body {
+  height: calc(450px - (45px + 70px));
+  border: 1px solid #263238;
+  background: #fff;
+
+  position: relative;
+}
+.chat-window .chat-body .message-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-window .chat-body .message-container::-webkit-scrollbar {
+  display: none;
+}
+.chat-window .chat-body .message {
+  height: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.chat-window .chat-body .message .message-content {
+  width: auto;
+  height: auto;
+  min-height: 40px;
+  max-width: 120px;
+  background-color: #43a047;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+#you {
+  justify-content: flex-start;
+}
+
+#you .message-content {
+  justify-content: flex-start;
+}
+
+#you .message-meta {
+  justify-content: flex-start;
+  margin-left: 5px;
+}
+
+#other {
+  justify-content: flex-end;
+}
+
+#other .message-content {
+  justify-content: flex-end;
+  background-color: cornflowerblue;
+}
+
+#other .message-meta {
+  justify-content: flex-end;
+  margin-right: 5px;
+}
+
+.message-meta #author {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.chat-window .chat-body .message .message-meta {
+  display: flex;
+  font-size: 12px;
+}
+
+.chat-window .chat-footer {
+  height: 40px;
+  border: 1px solid #263238;
+  border-top: none;
+  display: flex;
+}
+
+.chat-window .chat-footer input {
+  height: 100%;
+  flex: 85%;
+  border: 0;
+  padding: 0 0.7em;
+  font-size: 1em;
+  border-right: 1px dotted #607d8b;
+
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+}
+
+.chat-window .chat-footer button {
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 15%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  font-size: 25px;
+  color: lightgray;
+}
+
+.chat-window .chat-footer button:hover {
+  color: #43a047;
+}
+.hide {
+  opacity: 0 !important;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a id="accountManage" class="w3-bar-item w3-button w3-theme-l1">Account management</a>
+    <a  id="personalInfo"   class="w3-bar-item w3-button w3-hide-small w3-hover-white">Personal Information</a>
+   <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>-->
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a id="accontmovement" class="w3-bar-item w3-button w3-hover-black" >Account movements</button><!--onclick = "accontmovement()"-->
+  <a id="moneytransfers" onclick="moneytransfers()" class="w3-bar-item w3-button w3-hover-black" >Money transfers</a>
+  <a id="loans_" onclick="loansButton()" class="w3-bar-item w3-button w3-hover-black">Loans</a>
+  <a id="loansList" onclick="loans_list()" class="w3-bar-item w3-button w3-hover-black" >List of loans</a>
+</nav>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!--Chat Button-->
+<div>
+<a class="btn live-chat-btn util-padding-horz-5 util-padding-vert-5" onclick="chat()">
+	<span class="live-chat-text util-padding-horz-10">Chat manager</span>
+	<i class="fa fa-comments live-chat-icon live-chat-icon-online" data-notifications="0"></i>
+</a>
+</div>
+<!--end Chat Button-->
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div id="mainDiv" >//class="imgbckg"
+
+</div>
+<div id="mainDiv1" class="editable" class="widget-wrap">
+
+</div>
+
+
+<!--chat-->
+<div className="App"  id="chatdiv" class="form-popup">
+  <div className="joinChatContainer" class="form-container">
+    <h3>Join A Chat</h3>
+    <input
+    id="nameinput"
+      type="text"
+      placeholder="John..."
+      onChange= "nameInputChange()"
+    />
+    <input
+    id="roominput"
+      type="text"
+      placeholder="Room ID..."
+      onchange="roomInputChange()"
+    />
+    <a onClick="joinRoom()">Join A Room</a>
+  </div>
+
+  <!--<Chat socket={socket} username={username} room={room} />-->
+
+</div>
+<!--<script src="../webScraping.js"></script> -->
+<script  >
+  // 
+let info = false;
+
+$(document).ready(function () {
+  document.getElementById("chatdiv").style.display = "none";
+    $("#mainDiv").load("clientAreaHome")
+  
+//get client details
+    fetch("/client/getClientByID", {
+           method: "post",
+           headers: { 'Content-Type': 'application/json'},
+           body: JSON.stringify({
+             ID: clientID,
+             password: clientPassword
+           })
+         })
+         .then(response => response.json())
+         .then(data => {
+           if (data){
+             //alert("client found " + JSON.stringify(data))
+             localStorage.setItem("FIRST_NAME", data.first_name);
+             localStorage.setItem("LAST_NAME",data.last_name );
+             localStorage.setItem("PHONE_NUMBER",data.phone_number );
+             localStorage.setItem("LEVCOINS",data.numOfCoins );
+             localStorage.setItem("BIRTHDATE",data.date_of_birth );
+             
+             
+           }
+           else
+             alert("client Not Found")
+         })
+});
+//client details
+let clientFirstName = localStorage.getItem('FIRST_NAME');;
+let clientLasttName = localStorage.getItem('LAST_NAME');;
+let clientPassword = localStorage.getItem('PASSWORD');
+let clientPhone = localStorage.getItem('PHONE_NUMBER');
+let clientID = localStorage.getItem('ID');
+let clientCoins =  localStorage.getItem('LEVCOINS');
+let clientBirthDate = localStorage.getItem('BIRTHDATE')
+$("#personalInfo").click(function(){
+  
+    $("#mainDiv").load("clientInformation"); 
+     info = true;
+      });
+$("#accountManage").click(function(){
+  
+  $("#mainDiv").load("clientAreaHome"); 
+    });
+$("#loans_").click(function(){
+  $("#mainDiv").load("loans");  //למה לא עובד
+});
+
+$("#accontmovement").click(function(){
+  $("#mainDiv").load("listOfMovments");  //למה לא עובד
+});
+$("#loansList").click(function(){
+  $("#mainDiv").load("listOfLoans");  //למה לא עובד
+});
+function moneytransfers(){
+  $("#mainDiv").load("moneytransfers");    
+}
+
+//get list ao loans
+function loans_list(){
+
+//get loans list
+fetch("/loan/allLoans", {
+           method: "post",
+           headers: { 'Content-Type': 'application/json'},
+           body: JSON.stringify({
+            lender_ID: clientID
+           })
+         })
+         .then(response => response.json())
+         .then(data => {
+           if (data){
+             //alert( "type: " + typeof(data) + " " +data.length +" loans found " +  data )         
+
+var objLength = data.length;
+var myvar = '<h1></h1><table>'+'<br><br>'
+'<tr>'+
+'<th>lender_ID</th>'+
+'<th>borrower_ID</th>'+
+'<th>numOfCoins</th>'+
+'<th>date_of_loan</th>'+
+'</tr>';
+
+ for(var i = 0; i < objLength; i++){
+myvar += '<tr>'+
+'<td>'+data[i].lender_ID+'</td>'+
+'<td>'+data[i].borrower_ID+'</tD>'+
+'<td>'+data[i].numOfCoins+'</th>'+
+  '<td>'+data[i].date_of_loan+'</th>'+
+'</tr>'     
+ }
+
+ myvar += '</table>';
+
+console.log(myvar);
+ document.getElementById('mainDiv').innerHTML += myvar;
+ //document.getElementById('loansList').style.display = 'none';
+
+             /*data.forEach(function(item){
+            $("#mainDiv").append('<tr><td>'+item.lender_ID+'</td><td>'+item["borrower_ID"]+'</td><td>'+item.numOfCoins+'</td></tr>')
+            });  */         
+           }
+           else
+             alert("loans Not Found")
+         })
+};
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+    /*async function levcoinsToShekels(){
+  //לא עובד לעשותתת
+  //alert( await dolarToShekel("10"))
+  try {
+    $("#financialBalance").text("200");
+  let dolars_ =  $("#financialBalance").text();
+  //alert("dolars_ " + Number(dolars_))
+  //למה לא עובדב????????????????????????????
+  let shekels = await dolarToShekel("10").then(alert(shekels));
+  
+  $('#financialBalance').text(shekels);
+  } catch (error) {
+    console.log(error)
+  }
+  
+}*/
+
+//chat
+let username= null;
+//let setUsername = null 
+  let room = null;
+ // let setRoom = null;
+  let showChat = false; 
+  
+
+function chat(){
+  //alert("im in chat")
+  // בכוונה הפסקתי פעילות צאט.....
+  document.getElementById("chatdiv").style.display = "block";
+ 
+}
+
+function nameInputChange(){
+    
+  username=document.getElementById("nameinput").value;
+  //alert("done tUsername: " + username)
+ 
+}
+function roomInputChange(){
+  
+    room = document.getElementById("roominput").value;    
+   //alert("done Room: " + room)
+   
+}
+async function joinRoom(){
+  if (username != null && room != null) {
+      //socket.emit("join_room", room);
+      fetch("/chat/joinChat", {
+           method: "post",
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({room: room})
+         })
+         .then(response => response.json())
+         .then(data => {
+          if(data)
+             {//alert("join room done succefully");
+             showChat= true;
+            /// alert("im going to load chat.ejs")
+             $("#mainDiv").load("chat");
+ 
+            }
+          else
+          alert("join roomt did no succed")
+         })        
+    }
+    else alert(" username or room missing. username: " + username + " room: " + room)
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<style>
+  
+
+  .multi-button {
+  filter: drop-shadow(3px 10px 15px rgba(0, 0, 0, 0.45));
+}
+.multi-button button{
+  height: 50px;
+  width: 100px;
+  background: linear-gradient(to bottom, #55c4da, #232122);
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  margin: -5px; 
+  padding: 0;
+  stroke: black;
+  outline: none;
+}
+.multi-button :nth-child(1){
+  border-radius: 20px 0 0 20px;
+}
+.multi-button :nth-child(3){
+  border-radius: 0 20px 20px 0;
+}
+button:hover{
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+button:active{
+  filter: none;
+  transform: scale(.95);
+}
+/*title desing*/
+
+
+
+ 
+
+ h1 {
+	 font-size: 4vw;
+	 background-image: url(https://assets.euromoneydigital.com/dims4/default/cfc3fe7/2147483647/strip/true/crop/1883x529+0+0/resize/840x236!/quality/90/?url=http%3A%2F%2Feuromoney-brightspot.s3.amazonaws.com%2F8e%2Fcf%2Fb49d90ad45f699e29db30ecc4b72%2Fpbwm-2020.gif);
+    background-size: 10%;
+   background-clip: border-box;
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent;
+   font-family: fantasy;
+}
+
+</style>
+<div class="imgbckg">
+<div class="w3-main" style="margin-left:250px" class="editable" class="widget-wrap" > <!---->
+
+  <!--main window-->
+<div class="intro-header">
+  <div class="row">               
+          <div class="intro-message">   
+              <h1 class="animated bounceInDown">welcome to your personal area!</h1>
+              <br>
+              <br>
+              <br>
+              <h2 class="animated bounceInDown">Financial balance:</h>
+              <h3 style="color: teal;font-weight: 700;"   id="financialBalance" ></h3> 
+              <span id="coinstype"></span>
+        <br>
+        
+              </div>
+              </div>
+              </div>
+              <div class="multi-button">
+                <button onclick="levcoinsToShekels()">in shekels</button>
+                <button onclick="levcoinsToDolars()">in dolars</button>
+                <button onclick="tolevcoins()">in Lev Coins</button>
+              </div>
+             <!-- <button onclick="levcoinsToShekels()">in shekels</button>
+        <button onclick="levcoinsToDolars()">in dolars</button>
+        <button onclick="tolevcoins()">in Lev Coins</button>-->
+  </div>
+</div>
+  <!--<script type ="module" src="../webScraping.js"></script>-->
+  <!--<script src="../webScraping.js" ></script>-->
+  <script >
+    
+    //financialBalance
+    $(document).ready(function () {
+      document.getElementById('financialBalance').innerHTML= localStorage.getItem('LEVCOINS') + " Lev Coins";
+      //document.getElementById('coinstype').innerHTML = "Lev Coins"
+    });
+
+    function tolevcoins(){
+      document.getElementById('financialBalance').innerHTML = localStorage.getItem('LEVCOINS') + " Lev Coins";
+     // document.getElementById('coinstype').innerHTML = "Lev Coins"
+    }
+     function levcoinsToShekels(){
+      let levdolars = document.getElementById('financialBalance').innerHTML
+      fetch("/client/dolartoshekel", {
+        method: "post",
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({dolars: "10"})
+         })
+         .then(response => response.json())
+         .then(data => {
+          if(data)
+          document.getElementById('financialBalance').innerHTML = data + " " + "&#8362;";
+        })
+
+    
+    }
+
+    
+
+    function levcoinsToDolars(){
+      //alert("im in levcoinsToDolars")
+         //update client info
+         fetch("/levcoin/geLevCoin", {
+           method: "post",
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({})
+         })
+         .then(response => response.json())
+         .then(data => {
+          if(data)
+             {//alert("get levcoin succefully")
+             let dolarv = data.dolar_value;
+            // alert("dolarv: " + dolarv)
+             let coinsindolars = Number (localStorage.getItem('LEVCOINS')) * Number(dolarv)
+             //alert("coinsindolars: " + coinsindolars);
+             document.getElementById('financialBalance').innerHTML = coinsindolars + " " + "&#36;";
+             //document.getElementById('coinstype').innerHTML = "&#36;"
+             return coinsindolars;
+            }
+          else
+          alert("get levcoin succed")
+         })
+    
+      
+    }
+  </script>

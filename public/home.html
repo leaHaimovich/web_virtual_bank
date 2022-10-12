@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>lev coins bank</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link href="css/index.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style></style>
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+      <div class="w3-bar w3-white w3-card" id="myNavbar">
+        <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+        <!-- Right-sided navbar links -->
+        <div class="w3-right w3-hide-small">
+          <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+          <a onclick="openLoginForm()" class="w3-bar-item w3-button"
+            ><i class="fa fa-user"></i> Login</a
+          >
+          <a href="#contact" class="w3-bar-item w3-button"
+            ><i style="font-size: 24px" class="fa">&#xf090;</i> sign in</a
+          >
+        </div>
+        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+        <a
+          href="javascript:void(0)"
+          class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+          onclick="w3_open()"
+        >
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar on small screens when clicking the menu icon -->
+    <nav
+      class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
+      style="display: none"
+      id="mySidebar"
+    >
+      <a
+        href="javascript:void(0)"
+        onclick="w3_close()"
+        class="w3-bar-item w3-button w3-large w3-padding-16"
+        >Close ×</a
+      >
+      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button"
+        >ABOUT</a
+      >
+      <a onclick="openLoginForm()" class="w3-bar-item w3-button">Login</a>
+      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button"
+        >Open an account</a
+      >
+    </nav>
+
+    <!--log in form-->
+
+    <div class="form-popup" id="login">
+      <form class="form-container">
+        <!--action="/action_page.php"-->
+        <!--<div class="form-container" >-->
+        <h1>Login</h1>
+
+        <label for="ID"><b>ID</b></label>
+        <input type="text" placeholder="Enter ID" name="ID" id="ID" required />
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="psw"
+          id="password"
+          required
+        />
+
+        <button type="submit" class="btn" id="login_btn">Login</button>
+        <button type="button" class="btn cancel" onclick="closeLoginForm()">
+          Close
+        </button>
+      </form>
+    </div>
+
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+      <div class="w3-display-left w3-text-white" style="padding: 48px">
+        <span class="w3-jumbo w3-hide-small"
+          >Welcome to<br />
+          our virtual bank</span
+        ><br />
+        <span class="w3-xxlarge w3-hide-large w3-hide-medium"
+          >Welcome to our virtual bank</span
+        ><br />
+        <!--<span class="w3-large">Stop wasting valuable time with projects that just isn't you.</span>-->
+        <p>
+          <a
+            href="#about"
+            class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off"
+            >more about us</a
+          >
+        </p>
+      </div>
+      <div
+        class="w3-display-bottomleft w3-text-grey w3-large"
+        style="padding: 24px 48px"
+      >
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <div class="w3-container" style="padding: 128px 16px" id="about">
+      <h3 class="w3-center">ABOUT THE BANK</h3>
+      <!-- <p class="w3-center w3-large">Key features of our company</p>-->
+      <div class="w3-row-padding w3-center" style="margin-top: 64px">
+        <div class="w3-quarter">
+          <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+          <!--<p class="w3-large">virtual</p>-->
+          <p>
+            Our bank advocates innovation and the future, everything is managed
+            from your device, there is no need to go to the bank as in the past,
+            you no longer need a pocket to store money.
+          </p>
+        </div>
+        <div class="w3-quarter">
+          <!--<i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>-->
+          <i class="fas fa-hand-holding-usd" style="font-size: 40px"></i>
+          <p class="w3-large">Loans</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore.
+          </p>
+        </div>
+        <div class="w3-quarter">
+          <!--<i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>-->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="45"
+            height="45"
+            fill="currentColor"
+            class="bi bi-coin"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"
+            />
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+            />
+          </svg>
+          <p class="w3-large">LevCoins</p>
+          <p>
+            Our currencies are virtual, and values ​​are calculated according to
+            the number of customers, the greater the number of customers the
+            value decreases. Hurry to invest !!
+          </p>
+        </div>
+        <div class="w3-quarter">
+          <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+          <p class="w3-large">Support</p>
+          <p>
+            for any help you can contact us with our phone server: 052-6157457
+            or send us email: virtualBank@gmail.com.
+          </p>
+        </div>
+      </div>
+    </div>
+    >
+
+    <!-- Contact Section -->
+    <div
+      class="w3-container w3-light-grey"
+      style="padding: 128px 16px"
+      id="contact"
+    >
+      <h3 class="w3-center">sign in</h3>
+      <p class="w3-center w3-large">Open new bank account:</p>
+      <p class="w3-center w3-large">
+        Send a mail request to the manager to open a new bank account
+      </p>
+      <div style="margin-top: 48px">
+        <!--<p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Chicago, US</p>
+    <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
+    <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+    <br>-->
+        <form id="signinForm" target="_blank" onsubmit="return sendEmail();">
+          <!--action="/action_page.php"-->
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="text"
+              placeholder="Name"
+              required
+              name="Name"
+            />
+          </p>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="text"
+              placeholder="ID"
+              required
+              name="ID"
+            />
+          </p>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="email"
+              placeholder="Email"
+              required
+              name="Email"
+              id="client_email"
+            />
+          </p>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="text"
+              placeholder="phone number"
+              required
+              name="phone"
+            />
+          </p>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="password"
+              placeholder="password"
+              required
+              name="password"
+            />
+          </p>
+          <label>Birth date:</label>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="date"
+              min="1917-01-01"
+              placeholder="birth date"
+              required
+              name="birth_date"
+            />
+          </p>
+          <p>
+            <input
+              class="w3-input w3-border"
+              type="number"
+              min="0"
+              placeholder="Initial deposit amount"
+            />
+          </p>
+          <p>
+            <button class="w3-button w3-black" type="submit" id="send_request" onclick="sendEmail()">
+              <i class="fa fa-paper-plane"></i> SEND REQUEST
+            </button>
+          </p>
+          <h1 id="requestsend">request sent...</h1>
+          <!--style="display: none"-->
+        </form>
+        <!-- Image of location/map -->
+        <img
+          src="/w3images/map.jpg"
+          class="w3-image w3-greyscale"
+          style="width: 100%; margin-top: 48px"
+        />
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64">
+      <a href="#home" class="w3-button w3-light-grey"
+        ><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a
+      >
+      <div class="w3-xlarge w3-section">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </div>
+      <p>
+        Powered by
+        <a
+          href="https://www.linkedin.com/in/lea-haimovich-87a3b7221/"
+          title="bank"
+          target="_blank"
+          class="w3-hover-text-green"
+          >lea haimovich</a
+        >
+      </p>
+    </footer>
+  
+    <script>
+      let currntClient = null;
+
+      $(document).ready(function () {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("requestsend").hidden = true;
+      });
+
+      function openLoginForm() {
+        document.getElementById("login").style.display = "block";
+        //document.getElementById("ex").hidden=false;
+      }
+
+      function closeLoginForm() {
+        document.getElementById("login").style.display = "none";
+      }
+
+      // Modal Image Gallery
+      function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+      }
+
+      // Toggle between showing and hiding the sidebar when clicking the menu icon
+      var mySidebar = document.getElementById("mySidebar");
+
+      function w3_open() {
+        if (mySidebar.style.display === "block") {
+          mySidebar.style.display = "none";
+        } else {
+          mySidebar.style.display = "block";
+        }
+      }
+
+      // Close the sidebar with the close button
+      function w3_close() {
+        mySidebar.style.display = "none";
+      }
+     
+      $("#login_btn").click(function (e) {
+        e.preventDefault;
+        var ID_ = $("#ID").val();
+        var password_ = $("#password").val();
+
+        //alert("id: " + ID_ + "psw: " + password_)
+        var clientFlag = false;
+        var managerFlag = false;
+        fetch("/client/login", {
+          method: "post",
+          headers: {
+            //'Accept': 'application/json',
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID: ID_,
+            password: password_,
+          }),
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            if (data) {
+              //setLogIn();
+              //alert("client found " + JSON.stringify(data))
+              //let c = userDetails(ID_)
+              localStorage.setItem("ID", ID_);
+              localStorage.setItem("PASSWORD", password_);
+              clientFlag = true;
+              if(data == "myclient")
+              {// alert("im a client")
+                window.location.href = "/client/AreaHome";}
+              else if(data == "mymanager"){
+                //alert("im a manager");
+                window.location.href ="/manager/managerArea";
+              }
+              else alert("error")
+            } else alert("client Not Found");
+          });
+
+        /*if(!clientFlag){
+          fetch("/manager/loginM", {
+           method: "post",
+           headers: {
+            //'Accept': 'application/json',
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+             ID:ID_,
+             password:password_
+           })
+         })
+         .then(response => response.json())
+         .then(data => {
+           if (data){
+             //setLogIn();
+             alert("manager found " + JSON.stringify(data))
+             //let c = userDetails(ID_)
+             localStorage.setItem("ID", ID_);
+             localStorage.setItem("PASSWORD",password_ );
+             managerFlag = true;
+             //window.location.href = "/client/AreaHome";
+             //res.render("clientArea");
+           }
+           else
+             alert("manager Not Found")
+         })
+         }*/
+      });
+
+      function userDetails(userID) {
+        fetch("/client/user?userid=" + userID, {
+          method: "GET",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data) return (currntClient = data);
+            else alert("User Not Found");
+          });
+      }
+    </script>
+  </body>
+</html>
